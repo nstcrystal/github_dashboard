@@ -1,3 +1,0 @@
-/home/nstcrystal/workspace/github_dashboard/build/CMakeFiles/dashboard.dir
-/home/nstcrystal/workspace/github_dashboard/build/CMakeFiles/edit_cache.dir
-/home/nstcrystal/workspace/github_dashboard/build/CMakeFiles/rebuild_cache.dir
