@@ -114,7 +114,8 @@ std::vector<Repo> getRepos(const std::string& username)
     {
         repos.push_back(
             Repo{
-                repo["name"].get<std::string>()
+                repo["name"].get<std::string>(),
+                repo["stargazers_count"].get<int>()
             }
         );
     }
