@@ -168,10 +168,10 @@ int main()
             | bold
         );
 
-        // Hiển thị tối đa 5 repo đầu
+        // Hiển thị tối đa 10repo đầu
         for (size_t i = 0;
-             i < std::min(repos.size(), size_t(5));
-             i++)
+            i < std::min(repos.size(), size_t(10));
+            ++i)
         {
             elements.push_back(
                 text("• " + repos[i].name)
