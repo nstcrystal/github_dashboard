@@ -13,9 +13,10 @@ using namespace ftxui;
 using json = nlohmann::json;
 
 
-
+// Cấu trúc repo
 struct Repo {
     std::string name;
+    int stars;
 };
 
 
