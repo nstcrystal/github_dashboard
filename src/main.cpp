@@ -22,7 +22,7 @@ struct Repo {
 std::vector<Repo> getRepos(const std::string& username)
 {
     auto response =
-        getGithubUser(username + "/repos");
+        githubRequest(username + "/repos");
 
     auto reposJson =
         json::parse(response);
@@ -58,7 +58,7 @@ size_t WriteCallback(
 }
 
 
-std::string getGithubUser(
+std::string githubRequest(
     const std::string& username
 )
 {
@@ -125,7 +125,7 @@ int main()
     const std::string username = "NSTCrystal";
 
     // Lấy thông tin user
-    auto userData = json::parse(getGithubUser(username));
+    auto userData = json::parse(githubRequest(username));
 
     // Lấy danh sách repository
     auto repos = getRepos(username);
