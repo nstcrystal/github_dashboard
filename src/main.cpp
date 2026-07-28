@@ -122,71 +122,66 @@ std::string getGithubUser(
 
 int main()
 {
-    auto data =
-        getGithubUser("NSTCrystal");
+    const std::string username = "NSTCrystal";
 
+    // Lấy thông tin user
+    auto userData = json::parse(getGithubUser(username));
 
-    auto jsonData =
-        json::parse(data);
+    // Lấy danh sách repository
+    auto repos = getRepos(username);
 
+    auto screen = ScreenInteractive::TerminalOutput();
 
-    std::string username =
-        jsonData["login"];
+    auto dashboard = Renderer([&] {
 
+        Elements elements;
 
-    std::string followers =
-        std::to_string(
-            jsonData["followers"].get<int>()
+        elements.push_back(
+            text("Crystal Dashboard")
+            | bold
+            | center
         );
 
+        elements.push_back(separator());
 
-    std::string repos =
-        std::to_string(
-            jsonData["public_repos"].get<int>()
+        elements.push_back(
+            text("Username: " +
+                userData["login"].get<std::string>())
         );
 
-
-
-    auto screen =
-        ScreenInteractive::TerminalOutput();
-
-
-
-    auto dashboard =
-        Renderer(
-            [&] {
-
-                return vbox({
-
-                    text("Crystal Dashboard")
-                        | bold
-                        | center,
-
-                    separator(),
-
-                    text(
-                        "Username: "
-                        + username
-                    ),
-
-                    text(
-                        "Followers: "
-                        + followers
-                    ),
-
-                    text(
-                        "Public Repos: "
-                        + repos
-                    )
-
-                })
-                | border
-                | size(WIDTH, EQUAL, 40);
-
-            }
+        elements.push_back(
+            text("Followers: " +
+                std::to_string(userData["followers"].get<int>()))
         );
 
+        elements.push_back(
+            text("Public Repos: " +
+                std::to_string(userData["public_repos"].get<int>()))
+        );
 
+        elements.push_back(separator());
+
+        elements.push_back(
+            text("Repositories")
+            | bold
+        );
+
+        // Hiển thị tối đa 5 repo đầu
+        for (size_t i = 0;
+             i < std::min(repos.size(), size_t(5));
+             i++)
+        {
+            elements.push_back(
+                text("• " + repos[i].name)
+            );
+        }
+
+        return vbox(elements)
+            | border
+            | size(WIDTH, EQUAL, 50);
+    });
 
     screen.Loop(dashboard);
+
+    return 0;
 }
