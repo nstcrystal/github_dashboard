@@ -13,6 +13,13 @@ using namespace ftxui;
 using json = nlohmann::json;
 
 
+
+struct Repo {
+    std::string name;
+};
+
+
+
 size_t WriteCallback(
     void* contents,
     size_t size,
