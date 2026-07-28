@@ -143,6 +143,7 @@ int main()
         elements.push_back(
             text("Crystal Dashboard")
             | bold
+            | color(Color::Green)
             | center
         );
 
@@ -168,6 +169,7 @@ int main()
         elements.push_back(
             text("Repositories")
             | bold
+            | color(Color::Cyan)
         );
 
         // Hiển thị tối đa 10repo đầu
@@ -185,6 +187,7 @@ int main()
                     + std::to_string(repos[i].stars)
                     + ")"
                 )
+                | color(Color::Yellow)
             );
         }
 
