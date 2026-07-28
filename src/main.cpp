@@ -18,6 +18,27 @@ struct Repo {
     std::string name;
 };
 
+// Hàm lấy repository.
+std::vector<Repo> getRepos(const std::string& username)
+{
+    auto response =
+        getGithubUser(username + "/repos");
+
+    auto reposJson =
+        json::parse(response);
+
+    std::vector<Repo> repos;
+
+    for (auto& repo : reposJson)
+    {
+        repos.push_back({
+            repo["name"]
+        });
+    }
+
+    return repos;
+}
+
 
 
 size_t WriteCallback(
