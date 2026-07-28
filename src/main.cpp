@@ -69,9 +69,7 @@ std::string getGithubUser(
 
     if(curl)
     {
-        std::string url =
-            "https://api.github.com/users/"
-            + username;
+        std::string url = "https://api.github.com/users/" + username;
 
 
         curl_easy_setopt(
