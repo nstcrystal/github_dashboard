@@ -136,6 +136,15 @@ int main()
 
     auto screen = ScreenInteractive::TerminalOutput();
 
+
+    int totalStars = 0;
+
+    for (const auto& repo : repos)
+    {
+        totalStars += repo.stars;
+    }
+
+
     auto dashboard = Renderer([&] {
 
         Elements elements;
@@ -162,6 +171,13 @@ int main()
         elements.push_back(
             text("Public Repos: " +
                 std::to_string(userData["public_repos"].get<int>()))
+        );
+
+        elements.push_back(
+            text(
+                "Total Stars: "
+                + std::to_string(totalStars)
+            )
         );
 
         elements.push_back(separator());
