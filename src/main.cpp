@@ -31,9 +31,11 @@ std::vector<Repo> getRepos(const std::string& username)
 
     for (auto& repo : reposJson)
     {
-        repos.push_back({
-            repo["name"]
-        });
+        repos.push_back(
+            Repo{
+                repo["name"].get<std::string>()
+            }
+        );
     }
 
     return repos;
