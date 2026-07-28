@@ -2,6 +2,14 @@
 #include <curl/curl.h>
 #include <nlohmann/json.hpp>
 
+#include <ftxui/component/component.hpp>
+#include <ftxui/component/screen_interactive.hpp>
+#include <ftxui/dom/elements.hpp>
+
+
+using namespace ftxui;
+
+
 using json = nlohmann::json;
 
 
