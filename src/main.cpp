@@ -104,20 +104,63 @@ int main()
         json::parse(data);
 
 
-    std::cout
-        << "Username: "
-        << jsonData["login"]
-        << "\n";
+    std::string username =
+        jsonData["login"];
 
 
-    std::cout
-        << "Followers: "
-        << jsonData["followers"]
-        << "\n";
+    std::string followers =
+        std::to_string(
+            jsonData["followers"].get<int>()
+        );
 
 
-    std::cout
-        << "Repos: "
-        << jsonData["public_repos"]
-        << "\n";
+    std::string repos =
+        std::to_string(
+            jsonData["public_repos"].get<int>()
+        );
+
+
+
+    auto screen =
+        ScreenInteractive::TerminalOutput();
+
+
+
+    auto dashboard =
+        Renderer(
+            [&] {
+
+                return vbox({
+
+                    text("Crystal Dashboard")
+                        | bold
+                        | center,
+
+                    separator(),
+
+                    text(
+                        "Username: "
+                        + username
+                    ),
+
+                    text(
+                        "Followers: "
+                        + followers
+                    ),
+
+                    text(
+                        "Public Repos: "
+                        + repos
+                    )
+
+                })
+                | border
+                | size(WIDTH, EQUAL, 40);
+
+            }
+        );
+
+
+
+    screen.Loop(dashboard);
 }
