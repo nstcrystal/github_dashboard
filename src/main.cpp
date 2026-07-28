@@ -176,7 +176,15 @@ int main()
             ++i)
         {
             elements.push_back(
-                text("• " + repos[i].name)
+                // text("• " + repos[i].name)
+
+                text(
+                    "★ "
+                    + repos[i].name
+                    + " ("
+                    + std::to_string(repos[i].stars)
+                    + ")"
+                )
             );
         }
 
