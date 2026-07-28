@@ -6,6 +6,8 @@
 #include <ftxui/component/screen_interactive.hpp>
 #include <ftxui/dom/elements.hpp>
 
+#include <algorithm>
+
 
 using namespace ftxui;
 
@@ -133,6 +135,16 @@ int main()
 
     // Lấy danh sách repository
     auto repos = getRepos(username);
+
+    // Sắp xếp theo sao
+    std::sort(
+        repos.begin(),
+        repos.end(),
+        [](const Repo& a, const Repo& b)
+        {
+            return a.stars > b.stars;
+        }
+    );
 
     auto screen = ScreenInteractive::TerminalOutput();
 
