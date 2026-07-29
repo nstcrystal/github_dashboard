@@ -175,6 +175,43 @@ int main()
     }
 
 
+    // Lamda refresh
+    auto refresh = [&]()
+    {
+        userData = json::parse(githubRequest(username));
+
+        repos = getRepos(username);
+
+        std::sort(
+            repos.begin(),
+            repos.end(),
+            [](const Repo& a, const Repo& b)
+            {
+                return a.stars > b.stars;
+            }
+        );
+
+        totalStars = 0;
+        cpp = 0;
+        python = 0;
+        ts = 0;
+
+        for (const auto& repo : repos)
+        {
+            totalStars += repo.stars;
+
+            if (repo.language == "C++")
+                cpp++;
+
+            else if (repo.language == "Python")
+                python++;
+
+            else if (repo.language == "TypeScript")
+                ts++;
+        }
+    };
+
+
     auto dashboard = Renderer([&] {
 
         Elements elements;
