@@ -135,24 +135,8 @@ int main()
 {
     const std::string username = "nstcrystal";
 
-    // Lấy thông tin user
-    auto userData = json::parse(githubRequest(username));
-
-    // Lấy danh sách repository
-    auto repos = getRepos(username);
-
-    // Sắp xếp theo sao
-    std::sort(
-        repos.begin(),
-        repos.end(),
-        [](const Repo& a, const Repo& b)
-        {
-            return a.stars > b.stars;
-        }
-    );
-
-    auto screen = ScreenInteractive::TerminalOutput();
-
+    json userData;
+    std::vector<Repo> repos;
 
     int totalStars = 0;
 
@@ -160,22 +144,6 @@ int main()
     int python = 0;
     int ts = 0;
 
-    for (const auto& repo : repos)
-    {
-        totalStars += repo.stars;
-
-        if (repo.language == "C++")
-            cpp++;
-
-        else if (repo.language == "Python")
-            python++;
-
-        else if (repo.language == "TypeScript")
-            ts++;
-    }
-
-
-    // Lamda refresh
     auto refresh = [&]()
     {
         userData = json::parse(githubRequest(username));
@@ -188,8 +156,7 @@ int main()
             [](const Repo& a, const Repo& b)
             {
                 return a.stars > b.stars;
-            }
-        );
+            });
 
         totalStars = 0;
         cpp = 0;
@@ -202,95 +169,115 @@ int main()
 
             if (repo.language == "C++")
                 cpp++;
-
             else if (repo.language == "Python")
                 python++;
-
             else if (repo.language == "TypeScript")
                 ts++;
         }
     };
 
+    // Load lần đầu
+    refresh();
 
-    auto dashboard = Renderer([&] {
+    auto screen = ScreenInteractive::TerminalOutput();
 
-        Elements elements;
+    auto dashboard =
+        CatchEvent(
+            Renderer([&]
+            {
+                Elements elements;
 
-        elements.push_back(
-            text("Crystal Dashboard")
-            | bold
-            | color(Color::Green)
-            | center
-        );
+                elements.push_back(
+                    text("Crystal Dashboard")
+                    | bold
+                    | center
+                    | color(Color::Green));
 
-        elements.push_back(separator());
+                elements.push_back(separator());
 
-        elements.push_back(
-            text("Username: " +
-                userData["login"].get<std::string>())
-        );
+                elements.push_back(
+                    text("Username: " +
+                    userData["login"].get<std::string>()));
 
-        elements.push_back(
-            text("Followers: " +
-                std::to_string(userData["followers"].get<int>()))
-        );
+                elements.push_back(
+                    text("Followers: " +
+                    std::to_string(userData["followers"].get<int>())));
 
-        elements.push_back(
-            text("Public Repos: " +
-                std::to_string(userData["public_repos"].get<int>()))
-        );
+                elements.push_back(
+                    text("Public Repos: " +
+                    std::to_string(userData["public_repos"].get<int>())));
 
-        elements.push_back(
-            text(
-                "Total Stars: "
-                + std::to_string(totalStars)
-            )
-        );
+                elements.push_back(
+                    text("Total Stars: " +
+                    std::to_string(totalStars)));
 
+                elements.push_back(separator());
 
-        elements.push_back(separator());
+                elements.push_back(
+                    text("Repositories")
+                    | bold
+                    | color(Color::Cyan));
 
-        elements.push_back(
-            text("Repositories")
-            | bold
-            | color(Color::Cyan)
-        );
+                for (size_t i = 0;
+                     i < std::min(repos.size(), size_t(10));
+                     i++)
+                {
+                    const auto& repo = repos[i];
 
-        // Hiển thị tối đa 10repo đầu
-        for (size_t i = 0;
-            i < std::min(repos.size(), size_t(10));
-            ++i)
-        {
-            // elements.push_back(
-            //     // text("• " + repos[i].name)
+                    elements.push_back(
+                        vbox({
+                            text("★ " + repo.name) | bold,
+                            text(
+                                "  " +
+                                repo.language +
+                                " • ⭐" +
+                                std::to_string(repo.stars))
+                        }));
+                }
 
-            //     text(
-            //         "★ "
-            //         + repos[i].name
-            //         + " ("
-            //         + std::to_string(repos[i].stars)
-            //         + ")"
-            //     )
-            //     | color(Color::Yellow)
-            // );
+                elements.push_back(separator());
 
-            elements.push_back(
-                vbox({
-                    text("★ " + repos[i].name) | bold,
-                    text(
-                        "  "
-                        + repos[i].language
-                        + " • ⭐"
-                        + std::to_string(repos[i].stars)
-                    )
-                })
-            );
-        }
+                elements.push_back(
+                    text("Languages")
+                    | bold
+                    | color(Color::Yellow));
 
-        return vbox(elements)
-            | border
-            | size(WIDTH, EQUAL, 50);
-    });
+                elements.push_back(
+                    text("C++: " + std::to_string(cpp)));
+
+                elements.push_back(
+                    text("Python: " + std::to_string(python)));
+
+                elements.push_back(
+                    text("TypeScript: " + std::to_string(ts)));
+
+                elements.push_back(separator());
+
+                elements.push_back(
+                    text("[R] Refresh   [Q] Quit")
+                    | dim
+                    | center);
+
+                return vbox(elements)
+                    | border
+                    | size(WIDTH, EQUAL, 50);
+            }),
+            [&](Event event)
+            {
+                if (event == Event::Character('r'))
+                {
+                    refresh();
+                    return true;
+                }
+
+                if (event == Event::Character('q'))
+                {
+                    screen.ExitLoopClosure()();
+                    return true;
+                }
+
+                return false;
+            });
 
     screen.Loop(dashboard);
 
