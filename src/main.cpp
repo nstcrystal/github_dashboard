@@ -119,7 +119,10 @@ std::vector<Repo> getRepos(const std::string& username)
         repos.push_back(
             Repo{
                 repo["name"].get<std::string>(),
-                repo["stargazers_count"].get<int>()
+                repo["stargazers_count"].get<int>(),
+                repo["language"].is_null()
+                    ? "Unknown"
+                    : repo["language"].get<std::string>()
             }
         );
     }
@@ -207,17 +210,29 @@ int main()
             i < std::min(repos.size(), size_t(10));
             ++i)
         {
-            elements.push_back(
-                // text("• " + repos[i].name)
+            // elements.push_back(
+            //     // text("• " + repos[i].name)
 
-                text(
-                    "★ "
-                    + repos[i].name
-                    + " ("
-                    + std::to_string(repos[i].stars)
-                    + ")"
-                )
-                | color(Color::Yellow)
+            //     text(
+            //         "★ "
+            //         + repos[i].name
+            //         + " ("
+            //         + std::to_string(repos[i].stars)
+            //         + ")"
+            //     )
+            //     | color(Color::Yellow)
+            // );
+
+            elements.push_back(
+                vbox({
+                    text("★ " + repos[i].name) | bold,
+                    text(
+                        "  "
+                        + repos[i].language
+                        + " • ⭐"
+                        + std::to_string(repos[i].stars)
+                    )
+                })
             );
         }
 
