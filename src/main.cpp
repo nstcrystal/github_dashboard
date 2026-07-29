@@ -219,7 +219,7 @@ int main()
                     | color(Color::Cyan));
 
                 for (size_t i = 0;
-                     i < std::min(repos.size(), size_t(10));
+                     i < std::min(repos.size(), size_t(5));
                      i++)
                 {
                     const auto& repo = repos[i];
