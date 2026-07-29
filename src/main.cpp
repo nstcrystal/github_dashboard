@@ -163,6 +163,15 @@ int main()
     for (const auto& repo : repos)
     {
         totalStars += repo.stars;
+
+        if (repo.language == "C++")
+            cpp++;
+
+        else if (repo.language == "Python")
+            python++;
+
+        else if (repo.language == "TypeScript")
+            ts++;
     }
 
 
@@ -200,19 +209,6 @@ int main()
                 + std::to_string(totalStars)
             )
         );
-
-
-        for (const auto& repo : repos)
-        {
-            if (repo.language == "C++")
-                cpp++;
-
-            else if (repo.language == "Python")
-                python++;
-
-            else if (repo.language == "TypeScript")
-                ts++;
-        }
 
 
         elements.push_back(separator());
