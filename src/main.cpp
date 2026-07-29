@@ -16,9 +16,11 @@ using json = nlohmann::json;
 
 
 // Cấu trúc repo
-struct Repo {
+struct Repo
+{
     std::string name;
     int stars;
+    std::string language;
 };
 
 
