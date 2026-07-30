@@ -98,6 +98,10 @@ std::string githubRequest(
         curl_easy_cleanup(curl);
     }
 
+    // curl_easy_perform(curl);
+    // std::cout << response << std::endl;
+    // curl_easy_cleanup(curl);
+
 
     return response;
 }
@@ -275,20 +279,32 @@ int main()
             right.push_back(separator());
 
             for (size_t i = 0;
-                 i < std::min(repos.size(), size_t(10));
+                 i < std::min(repos.size(), size_t(7));
                  ++i)
             {
                 const auto& repo = repos[i];
 
-                right.push_back(
-                    vbox({
-                        text("★ " + repo.name) | bold,
-                        hbox({
-                            text("  " + repo.language) | dim | italic,
-                            text("     ⭐: " + std::to_string(repo.stars) + "\n") | italic
+                if (i == 7) {
+                    right.push_back(
+                        vbox({
+                            text("★ " + repo.name) | bold,
+                            hbox({
+                                text("  " + repo.language) | dim | italic,
+                                text("     ⭐: " + std::to_string(repo.stars)) | italic,
+                            })
                         })
-                    })
-                );
+                    );
+                } else {
+                    right.push_back(
+                        vbox({
+                            text("★ " + repo.name) | bold,
+                            hbox({
+                                text("  " + repo.language) | dim | italic,
+                                text("     ⭐: " + std::to_string(repo.stars) + "\n") | italic,
+                            })
+                        })
+                    );
+                }
             }
 
             return vbox({
