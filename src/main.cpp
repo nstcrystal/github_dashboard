@@ -185,7 +185,10 @@ int main()
         CatchEvent(
             Renderer([&]
             {
-                Elements elements;
+                // Elements elements;
+
+                Elements left;
+                Elements right;
 
                 elements.push_back(
                     text("Crystal Dashboard")
