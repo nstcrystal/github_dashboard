@@ -197,14 +197,14 @@ int main()
 
             left.push_back(
                 hbox({
-                    text("Username: ") | bold,
+                    text("Username:     ") | bold,
                     text(userData["login"].get<std::string>())
                 })
             );
-            
+
             left.push_back(
                 hbox({
-                    text("Followers: ") | bold,
+                    text("Followers:    ") | bold,
                     text(std::to_string(userData["followers"].get<int>()))
                 })
             );
@@ -218,7 +218,7 @@ int main()
 
             left.push_back(
                 hbox({
-                    text("Total Stars: ") | bold,
+                    text("Total Stars:  ") | bold,
                     text(std::to_string(totalStars))
                 })
             );
