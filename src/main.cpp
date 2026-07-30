@@ -284,7 +284,7 @@ int main()
             {
                 const auto& repo = repos[i];
 
-                if (i == 7) {
+                if (i >= 6) {
                     right.push_back(
                         vbox({
                             text("★ " + repo.name) | bold,
