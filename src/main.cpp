@@ -190,6 +190,7 @@ int main()
                 Elements left;
                 Elements right;
 
+
                 left.push_back(
                     text("Username: " +
                     userData["login"].get<std::string>())
@@ -235,9 +236,31 @@ int main()
                 );
 
 
-                elements.push_back(separator());
+                right.push_back(
+                    text("Repositories")
+                    | bold
+                    | color(Color::Cyan)
+                );
 
+                for (size_t i = 0;
+                    i < std::min(repos.size(), size_t(10));
+                    i++)
+                {
+                    const auto& repo = repos[i];
 
+                    right.push_back(
+                        vbox({
+                            text("★ " + repo.name) | bold,
+                            text(
+                                "  "
+                                + repo.language
+                                + " • ⭐"
+                                + std::to_string(repo.stars)
+                            )
+                        })
+                    );
+                }
+                
 
                 elements.push_back(separator());
 
