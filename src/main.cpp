@@ -273,7 +273,7 @@ int main()
 
 
             left.push_back(
-                text("Selected")
+                text("  Selected")
                 | bold
                 | color(Color::Yellow1)
             );
@@ -304,7 +304,7 @@ int main()
                 auto info = hbox({
                     text("  " + repo.language) | dim | italic,
                     filler(),
-                    text("⭐ " + std::to_string(repo.stars) + "\n") | italic
+                    text("⭐(" + std::to_string(repo.stars) + ")\n") | italic
                 });
 
                 
@@ -312,7 +312,7 @@ int main()
                     info = hbox({
                         text("  " + repo.language) | dim | italic,
                         filler(),
-                        text("⭐ " + std::to_string(repo.stars)) | italic
+                        text("⭐(" + std::to_string(repo.stars) + ")") | italic
                     });
                 }
 
@@ -327,8 +327,9 @@ int main()
                 {
                     repoCard =
                         repoCard
-                        | inverted
-                        | border;
+                        | bgcolor(Color::Blue)
+                        // | inverted
+                        // | border;
                 }
 
                 right.push_back(repoCard);
@@ -357,7 +358,8 @@ int main()
 
                     vbox(left)
                     // | border
-                    | flex,
+                    | flex
+                    | size(WIDTH, EQUAL, 30),
 
                     separator(),
 
@@ -375,7 +377,7 @@ int main()
 
             })
             | border
-            | size(WIDTH, EQUAL, 65);
+            | size(WIDTH, EQUAL, 68);
 
         }),
 
