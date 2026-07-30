@@ -226,7 +226,8 @@ int main()
                 text("Python     : " + std::to_string(python)));
 
             left.push_back(
-                text("TypeScript : " + std::to_string(ts));
+                text("TypeScript : " + std::to_string(ts))
+            );
 
             // ===== Right Panel =====
             right.push_back(
