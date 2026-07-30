@@ -271,6 +271,9 @@ int main()
                 })
             );
 
+            // filler(),
+            left.push_back(text(""));
+            left.push_back(text(""));
 
             left.push_back(
                 text("  Selected")
@@ -371,7 +374,9 @@ int main()
 
                 separator(),
 
-                text("[R] Refresh    [Q] Quit")
+                text(
+                    "[↑↓] Select    [R] Refresh    [Q] Quit"
+                )
                 | center
                 | dim
 
