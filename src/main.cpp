@@ -260,19 +260,40 @@ int main()
                         })
                     );
                 }
-                
 
-                elements.push_back(separator());
 
-                elements.push_back(
-                    text("[R] Refresh   [Q] Quit")
+                return vbox({
+
+                    text("Crystal Dashboard")
+                    | bold
+                    | center
+                    | color(Color::Green),
+
+                    separator(),
+
+                    hbox({
+
+                        vbox(left)
+                        | border
+                        | flex,
+
+                        separator(),
+
+                        vbox(right)
+                        | border
+                        | flex
+
+                    }),
+
+                    separator(),
+
+                    text("[R] Refresh    [Q] Quit")
+                    | center
                     | dim
-                    | center);
 
-                return vbox(elements)
-                    | border
-                    | size(WIDTH, EQUAL, 50);
-            }),
+                })
+                | border
+                | size(WIDTH, EQUAL, 80);
             [&](Event event)
             {
                 if (event == Event::Character('r'))
