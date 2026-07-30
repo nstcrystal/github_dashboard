@@ -288,27 +288,33 @@ int main()
             {
                 const auto& repo = repos[i];
 
+                auto name = text("★ " + repo.name) | bold;
+
+                auto info = hbox({
+                    text("  " + repo.language) | dim | italic,
+                    filler(),
+                    text("⭐ " + std::to_string(repo.stars) + "\n") | italic
+                });
+
+                
                 if (i >= 6) {
-                    right.push_back(
-                        vbox({
-                            text("★ " + repo.name) | bold,
-                            hbox({
-                                text("  " + repo.language) | dim | italic,
-                                text("     ⭐: " + std::to_string(repo.stars)) | italic,
-                            })
-                        })
-                    );
-                } else {
-                    right.push_back(
-                        vbox({
-                            text("★ " + repo.name) | bold,
-                            hbox({
-                                text("  " + repo.language) | dim | italic,
-                                text("     ⭐: " + std::to_string(repo.stars) + "\n") | italic,
-                            })
-                        })
-                    );
+                    info = hbox({
+                        text("  " + repo.language) | dim | italic,
+                        filler(),
+                        text("⭐ " + std::to_string(repo.stars)) | italic
+                    });
                 }
+                
+
+                right.push_back(
+                    vbox({
+                        text("★ " + repo.name) | bold,
+                        hbox({
+                            text("  " + repo.language) | dim | italic,
+                            text("     ⭐: " + std::to_string(repo.stars)) | italic,
+                        })
+                    })
+                );
             }
 
             return vbox({
