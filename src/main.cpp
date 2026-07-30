@@ -117,9 +117,6 @@ std::vector<Repo> getRepos(const std::string& username)
         json::parse(response);
 
     std::vector<Repo> repos;
-    
-    int selectedRepo = 0;
-
 
 
     for (auto& repo : reposJson)
@@ -145,6 +142,8 @@ int main()
 
     json userData;
     std::vector<Repo> repos;
+
+    int selectedRepo = 0;
 
     int totalStars = 0;
     int cpp = 0;
@@ -305,11 +304,22 @@ int main()
                     });
                 }
 
-                
+
                 Element repoCard = vbox({
                     name,
                     info
                 });
+
+
+                if ((int)i == selectedRepo)
+                {
+                    repoCard =
+                        repoCard
+                        | inverted
+                        | border;
+                }
+
+                right.push_back(repoCard);
 
                 // right.push_back(
                 //     vbox({
