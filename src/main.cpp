@@ -117,6 +117,10 @@ std::vector<Repo> getRepos(const std::string& username)
         json::parse(response);
 
     std::vector<Repo> repos;
+    
+    int selectedRepo = 0;
+
+
 
     for (auto& repo : reposJson)
     {
