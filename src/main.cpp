@@ -327,7 +327,7 @@ int main()
                 {
                     repoCard =
                         repoCard
-                        | bgcolor(Color::Blue)
+                        | bgcolor(Color::Blue);
                         // | inverted
                         // | border;
                 }
