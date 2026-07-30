@@ -191,34 +191,44 @@ int main()
                 text("Profile")
                 | bold
                 | center
-                | color(Color::Yellow));
+                | color(Color::Cyan));
 
             left.push_back(separator());
 
             left.push_back(
-                text("Username: " +
-                userData["login"].get<std::string>()));
+                hbox({
+                    text("Username: ") | bold,
+                    text(userData["login"].get<std::string>())
+                })
+            );
+            
+            left.push_back(
+                hbox({
+                    text("Followers: ") | bold,
+                    text(std::to_string(userData["followers"].get<int>()))
+                })
+            );
 
             left.push_back(
-                text("Followers: " +
-                std::to_string(
-                    userData["followers"].get<int>())));
+                hbox({
+                    text("Public Repos: ") | bold,
+                    text(std::to_string(userData["public_repos"].get<int>()))
+                })
+            );
 
             left.push_back(
-                text("Public Repos: " +
-                std::to_string(
-                    userData["public_repos"].get<int>())));
+                hbox({
+                    text("Total Stars: ") | bold,
+                    text(std::to_string(totalStars))
+                })
+            );
+
+            left.push_back(text(""));
 
             left.push_back(
-                text("Total Stars: " +
-                std::to_string(totalStars)));
-
-            left.push_back(separator());
-
-            left.push_back(
-                text("Languages")
+                text("  Languages")
                 | bold
-                | color(Color::Green));
+            );
 
             left.push_back(
                 text("C++        : " + std::to_string(cpp)));
