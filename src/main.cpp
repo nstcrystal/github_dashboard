@@ -285,7 +285,7 @@ int main()
                         text("★ " + repo.name) | bold,
                         hbox({
                             text("  " + repo.language) | dim | italic,
-                            text("     ⭐: " + std::to_string(repo.stars)) | italic
+                            text("     ⭐: " + std::to_string(repo.stars) + "\n") | italic
                         })
                     })
                 );
