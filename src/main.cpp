@@ -190,6 +190,7 @@ int main()
             left.push_back(
                 text("Profile")
                 | bold
+                | center
                 | color(Color::Yellow));
 
             left.push_back(separator());
@@ -233,6 +234,7 @@ int main()
             right.push_back(
                 text("Top Repositories")
                 | bold
+                | center
                 | color(Color::Cyan));
 
             right.push_back(separator());
@@ -285,7 +287,7 @@ int main()
 
             })
             | border
-            | size(WIDTH, EQUAL, 90);
+            | size(WIDTH, EQUAL, 70);
 
         }),
 
