@@ -231,13 +231,13 @@ int main()
             );
 
             left.push_back(
-                text("C++        : " + std::to_string(cpp)));
+                text("C++        :  " + std::to_string(cpp)));
 
             left.push_back(
-                text("Python     : " + std::to_string(python)));
+                text("Python     :  " + std::to_string(python)));
 
             left.push_back(
-                text("TypeScript : " + std::to_string(ts))
+                text("TypeScript :  " + std::to_string(ts))
             );
 
             // ===== Right Panel =====
