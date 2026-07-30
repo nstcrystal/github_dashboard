@@ -200,6 +200,8 @@ int main()
                 | bold
             );
 
+            left.push_back(text(""));
+
             left.push_back(
                 hbox({
                     text("Username     : ") | bold,
@@ -236,14 +238,27 @@ int main()
                 | bold
             );
 
-            left.push_back(
-                text("C++          : " + std::to_string(cpp)));
+            left.push_back(text(""));
 
             left.push_back(
-                text("Python       : " + std::to_string(python)));
+                hbox({
+                    text("C++          : ") |bold,
+                    text(std::to_string(cpp))
+                })
+            );
 
             left.push_back(
-                text("TypeScript   : " + std::to_string(ts))
+                hbox({
+                    text("Python       : ") |bold,
+                    text(std::to_string(python))
+                })
+            );
+
+            left.push_back(
+                hbox({
+                    text("TypeScript   : ") |bold,
+                    text(std::to_string(ts))
+                })
             );
 
             // ===== Right Panel =====
