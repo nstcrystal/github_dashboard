@@ -338,7 +338,7 @@ int main()
 
             })
             | border
-            | size(WIDTH, EQUAL, 70);
+            | size(WIDTH, EQUAL, 65);
 
         }),
 
