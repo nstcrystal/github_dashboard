@@ -190,53 +190,53 @@ int main()
                 Elements left;
                 Elements right;
 
-                elements.push_back(
-                    text("Crystal Dashboard")
-                    | bold
-                    | center
-                    | color(Color::Green));
-
-                elements.push_back(separator());
-
-                elements.push_back(
+                left.push_back(
                     text("Username: " +
-                    userData["login"].get<std::string>()));
+                    userData["login"].get<std::string>())
+                );
 
-                elements.push_back(
+                left.push_back(
                     text("Followers: " +
-                    std::to_string(userData["followers"].get<int>())));
+                    std::to_string(
+                        userData["followers"].get<int>()
+                    ))
+                );
 
-                elements.push_back(
+                left.push_back(
                     text("Public Repos: " +
-                    std::to_string(userData["public_repos"].get<int>())));
+                    std::to_string(
+                        userData["public_repos"].get<int>()
+                    ))
+                );
 
-                elements.push_back(
+                left.push_back(
                     text("Total Stars: " +
-                    std::to_string(totalStars)));
+                    std::to_string(totalStars))
+                );
+
+                left.push_back(separator());
+
+                left.push_back(
+                    text("Languages")
+                    | bold
+                    | color(Color::Yellow)
+                );
+
+                left.push_back(
+                    text("C++: " + std::to_string(cpp))
+                );
+
+                left.push_back(
+                    text("Python: " + std::to_string(python))
+                );
+
+                left.push_back(
+                    text("TypeScript: " + std::to_string(ts))
+                );
+
 
                 elements.push_back(separator());
 
-                elements.push_back(
-                    text("Repositories")
-                    | bold
-                    | color(Color::Cyan));
-
-                for (size_t i = 0;
-                     i < std::min(repos.size(), size_t(5));
-                     i++)
-                {
-                    const auto& repo = repos[i];
-
-                    elements.push_back(
-                        vbox({
-                            text("★ " + repo.name) | bold,
-                            text(
-                                "  " +
-                                repo.language +
-                                " • ⭐" +
-                                std::to_string(repo.stars))
-                        }));
-                }
 
 
                 elements.push_back(separator());
