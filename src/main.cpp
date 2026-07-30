@@ -375,6 +375,24 @@ int main()
                 return true;
             }
 
+
+            if (event == Event::ArrowDown)
+            {
+                if (selectedRepo + 1 < (int)repos.size())
+                    selectedRepo++;
+
+                return true;
+            }
+
+            if (event == Event::ArrowUp)
+            {
+                if (selectedRepo > 0)
+                    selectedRepo--;
+
+                return true;
+            }
+
+
             if (event == Event::Character('q'))
             {
                 screen.ExitLoopClosure()();
