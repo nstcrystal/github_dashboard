@@ -266,11 +266,13 @@ int main()
                 hbox({
 
                     vbox(left)
-                    | border
+                    // | border
                     | flex,
 
+                    separator(),
+
                     vbox(right)
-                    | border
+                    // | border
                     | flex
 
                 }),
