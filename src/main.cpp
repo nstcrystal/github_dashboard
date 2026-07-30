@@ -304,17 +304,22 @@ int main()
                         text("⭐ " + std::to_string(repo.stars)) | italic
                     });
                 }
-                
 
-                right.push_back(
-                    vbox({
-                        text("★ " + repo.name) | bold,
-                        hbox({
-                            text("  " + repo.language) | dim | italic,
-                            text("     ⭐: " + std::to_string(repo.stars)) | italic,
-                        })
-                    })
-                );
+                
+                Element repoCard = vbox({
+                    name,
+                    info
+                });
+
+                // right.push_back(
+                //     vbox({
+                //         text("★ " + repo.name) | bold,
+                //         hbox({
+                //             text("  " + repo.language) | dim | italic,
+                //             text("     ⭐: " + std::to_string(repo.stars)) | italic,
+                //         })
+                //     })
+                // );
             }
 
             return vbox({
