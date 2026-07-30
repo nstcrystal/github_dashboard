@@ -271,6 +271,18 @@ int main()
                 })
             );
 
+
+            left.push_back(
+                text("Selected")
+                | bold
+                | color(Color::Yellow1)
+            );
+
+            left.push_back(
+                text(repos[selectedRepo].name)
+                | color(Color::Cyan1)
+            );
+
             // ===== Right Panel =====
             right.push_back(
                 text("Top Repositories")
