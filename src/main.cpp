@@ -191,16 +191,18 @@ int main()
                 text("Profile")
                 | bold
                 | center
-                | color(Color::Cyan));
+                | color(Color::Cyan1)
+            );
 
             left.push_back(separator());
 
             left.push_back(
                 text("  About")
                 | bold
+                | color(Color::Yellow1)
             );
 
-            left.push_back(text(""));
+            // left.push_back(text(""));
 
             left.push_back(
                 hbox({
@@ -236,9 +238,10 @@ int main()
             left.push_back(
                 text("  Languages")
                 | bold
+                | color(Color::Yellow1)
             );
 
-            left.push_back(text(""));
+            // left.push_back(text(""));
 
             left.push_back(
                 hbox({
@@ -266,7 +269,8 @@ int main()
                 text("Top Repositories")
                 | bold
                 | center
-                | color(Color::Cyan));
+                | color(Color::Cyan1)
+            );
 
             right.push_back(separator());
 
@@ -279,12 +283,12 @@ int main()
                 right.push_back(
                     vbox({
                         text("★ " + repo.name) | bold,
-                        text(
-                            "  " +
-                            repo.language +
-                            " • ⭐" +
-                            std::to_string(repo.stars))
-                    }));
+                        hbox({
+                            text("  " + repo.language) | dim | italic,
+                            text("     ⭐: " + std::to_string(repo.stars)) | italic
+                        })
+                    })
+                );
             }
 
             return vbox({
@@ -292,7 +296,7 @@ int main()
                 text("Crystal Dashboard")
                 | bold
                 | center
-                | color(Color::Green),
+                | color(Color::Red1),
 
                 separator(),
 
