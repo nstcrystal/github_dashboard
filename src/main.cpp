@@ -238,21 +238,6 @@ int main()
                         }));
                 }
 
-                elements.push_back(separator());
-
-                elements.push_back(
-                    text("Languages")
-                    | bold
-                    | color(Color::Yellow));
-
-                elements.push_back(
-                    text("C++: " + std::to_string(cpp)));
-
-                elements.push_back(
-                    text("Python: " + std::to_string(python)));
-
-                elements.push_back(
-                    text("TypeScript: " + std::to_string(ts)));
 
                 elements.push_back(separator());
 
